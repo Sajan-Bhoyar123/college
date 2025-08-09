@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>School Finder</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body>
+    <header class="header">
+      <div class="container">
+        <h1>School Finder APIs</h1>
+        <p>Add a school and list nearest schools to your location.</p>
+      </div>
+    </header>
+
+    <main class="container grid">
+      <section class="card">
+        <h2>Add School</h2>
+        <form id="add-form">
+          <div class="field">
+            <label for="name">Name</label>
+            <input id="name" name="name" placeholder="e.g. Springdale High" required />
+          </div>
+          <div class="field">
+            <label for="address">Address</label>
+            <input id="address" name="address" placeholder="e.g. 123 Main Street" required />
+          </div>
+          <div class="field two">
+            <div>
+              <label for="latitude">Latitude</label>
+              <input id="latitude" name="latitude" type="number" step="any" required />
+            </div>
+            <div>
+              <label for="longitude">Longitude</label>
+              <input id="longitude" name="longitude" type="number" step="any" required />
+            </div>
+          </div>
+          <button class="btn" type="submit">Add School</button>
+          <div id="add-result" class="result"></div>
+        </form>
+      </section>
+
+      <section class="card">
+        <h2>List Nearby Schools</h2>
+        <form id="list-form">
+          <div class="field two">
+            <div>
+              <label for="user-lat">Your Latitude</label>
+              <input id="user-lat" name="user-lat" type="number" step="any" required />
+            </div>
+            <div>
+              <label for="user-lon">Your Longitude</label>
+              <input id="user-lon" name="user-lon" type="number" step="any" required />
+            </div>
+          </div>
+          <div class="field">
+            <button type="button" class="btn ghost" id="use-location">Use My Current Location</button>
+          </div>
+          <button class="btn" type="submit">Fetch & Sort</button>
+        </form>
+
+        <div class="table-wrapper" id="table-section" style="display: none;">
+          <table>
+            <thead>
+              <tr>
+                <th style="width:56px">#</th>
+                <th style="width:220px">Name</th>
+                <th style="width:260px">Address</th>
+                <th style="width:140px">Latitude</th>
+                <th style="width:140px">Longitude</th>
+                <th style="width:150px">Distance (km)</th>
+              </tr>
+            </thead>
+            <tbody id="schools-body"></tbody>
+          </table>
+          <div class="pagination">
+            <button class="btn ghost" id="prev-page" disabled>Previous</button>
+            <span id="page-info">Page 1 of 1</span>
+            <button class="btn ghost" id="next-page" disabled>Next</button>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="container">Built with Express + MySQL. © 2025</div>
+    </footer>
+
+    <script src="/app.js"></script>
+  </body>
+  </html>
+
+
+
