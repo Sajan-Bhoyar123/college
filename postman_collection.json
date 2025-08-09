@@ -11,7 +11,11 @@
         "header": [
           { "key": "Content-Type", "value": "application/json" }
         ],
+<<<<<<< HEAD
         "url": { "raw": "https://college-53qo.onrender.com/test-json", "protocol": "https", "host": ["college-53qo.onrender.com"], "path": ["test-json"] },
+=======
+        "url": { "raw": "https://college-53qo.onrender.com/addSchool", "protocol": "https", "host": ["college-53qo.onrender.com"], "path": ["addSchool"] },
+>>>>>>> 41dda4bc67c089890997d9300aad3ef7b1c70c18
         "body": {
           "mode": "raw",
           "raw": "{\n  \"test\": \"data\",\n  \"number\": 123\n}",
