@@ -52,15 +52,21 @@ Tests cover:
 
 ### Environment
 
-```
-PORT=3000
-DB_HOST=localhost
-DB_USER=root
-DB_PASSWORD=your_password
-DB_NAME=school_db
-```
+1. **Copy the example file**:
+   ```bash
+   cp env.example .env
+   ```
 
-Also see `.env.example` for a template.
+2. **Update `.env` with your actual credentials**:
+   ```
+   PORT=3000
+   DB_HOST=localhost
+   DB_USER=root
+   DB_PASSWORD=your_actual_password
+   DB_NAME=your_database_name
+   ```
+
+**Important**: Never commit your actual `.env` file to git. The `.env` file is already in `.gitignore` to keep your credentials secure.
 
 ### Postman
 

@@ -6,8 +6,8 @@ dotenv.config();
 const {
   DB_HOST = 'localhost',
   DB_USER = 'root',
-  DB_PASSWORD = 'Hemant@12345',
-  DB_NAME = 'college',
+  DB_PASSWORD = '',
+  DB_NAME = 'school_db',
 } = process.env;
 
 export const databasePool = mysql.createPool({
