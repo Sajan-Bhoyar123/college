@@ -11,7 +11,7 @@
         "header": [
           { "key": "Content-Type", "value": "application/json" }
         ],
-        "url": { "raw": "http://localhost:3000/addSchool", "protocol": "http", "host": ["localhost"], "port": "3000", "path": ["addSchool"] },
+        "url": { "raw": "https://college-53qo.onrender.com/addSchool", "protocol": "https", "host": ["college-53qo.onrender.com"], "path": ["addSchool"] },
         "body": {
           "mode": "raw",
           "raw": "{\n  \"name\": \"Delta School\",\n  \"address\": \"4th Street\",\n  \"latitude\": 12.9716,\n  \"longitude\": 77.5946\n}"
@@ -23,10 +23,9 @@
       "request": {
         "method": "GET",
         "url": {
-          "raw": "http://localhost:3000/listSchools?latitude=12.9716&longitude=77.5946",
-          "protocol": "http",
-          "host": ["localhost"],
-          "port": "3000",
+          "raw": "https://college-53qo.onrender.com/listSchools?latitude=12.9716&longitude=77.5946",
+          "protocol": "https",
+          "host": ["college-53qo.onrender.com"],
           "path": ["listSchools"],
           "query": [
             {"key": "latitude", "value": "12.9716"},
