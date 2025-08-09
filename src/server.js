@@ -13,7 +13,19 @@ dotenv.config();
 const app = express();
 
 app.use(cors());
-app.use(express.json());
+// Ensure JSON parsing works correctly in production
+app.use(express.json({ 
+  limit: '10mb',
+  verify: (req, res, buf) => {
+    try {
+      JSON.parse(buf);
+    } catch (e) {
+      res.status(400).json({ error: 'Invalid JSON' });
+      throw new Error('Invalid JSON');
+    }
+  }
+}));
+app.use(express.urlencoded({ extended: true }));
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -22,6 +34,26 @@ app.use(express.static(path.join(__dirname, '..', 'public')));
 
 app.get('/health', (req, res) => {
   res.json({ status: 'ok' });
+});
+
+// Test endpoint to verify JSON parsing
+app.post('/test-json', (req, res) => {
+  res.json({
+    message: 'JSON parsing test',
+    receivedBody: req.body,
+    bodyType: typeof req.body,
+    headers: req.headers
+  });
+});
+
+// Request logging middleware for debugging
+app.use((req, res, next) => {
+  console.log(`[${new Date().toISOString()}] ${req.method} ${req.path}`);
+  if (req.method === 'POST') {
+    console.log('Request headers:', req.headers);
+    console.log('Request body:', req.body);
+  }
+  next();
 });
 
 app.use('/', schoolsRouter);

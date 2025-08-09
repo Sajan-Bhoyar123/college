@@ -14,6 +14,27 @@ const addSchoolSchema = z.object({
 
 export async function addSchool(req, res) {
   try {
+    // Debug logging for production troubleshooting
+    console.log('=== ADD SCHOOL REQUEST ===');
+    console.log('Headers:', JSON.stringify(req.headers, null, 2));
+    console.log('Body:', JSON.stringify(req.body, null, 2));
+    console.log('Content-Type:', req.headers['content-type']);
+    console.log('Body type:', typeof req.body);
+    console.log('Body keys:', req.body ? Object.keys(req.body) : 'No body');
+    
+    // Ensure req.body exists and is properly parsed
+    if (!req.body || typeof req.body !== 'object') {
+      return res.status(400).json({
+        error: 'InvalidRequest',
+        message: 'Request body is missing or invalid',
+        debug: {
+          bodyType: typeof req.body,
+          bodyExists: !!req.body,
+          contentType: req.headers['content-type']
+        }
+      });
+    }
+
     const parseResult = addSchoolSchema.safeParse({
       name: req.body?.name,
       address: req.body?.address,

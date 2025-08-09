@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Test Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .test-section {
+            margin: 20px 0;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        button {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+        .response {
+            background: #f8f9fa;
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 10px;
+            white-space: pre-wrap;
+        }
+        .error {
+            background: #f8d7da;
+            color: #721c24;
+        }
+        .success {
+            background: #d4edda;
+            color: #155724;
+        }
+    </style>
+</head>
+<body>
+    <h1>School Management API Test</h1>
+    
+    <div class="test-section">
+        <h2>Add School Test</h2>
+        <button onclick="testAddSchool()">Test Add School</button>
+        <div id="addSchoolResponse" class="response"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>List Schools Test</h2>
+        <button onclick="testListSchools()">Test List Schools</button>
+        <div id="listSchoolsResponse" class="response"></div>
+    </div>
+
+    <script>
+        async function testAddSchool() {
+            const responseDiv = document.getElementById('addSchoolResponse');
+            responseDiv.textContent = 'Testing...';
+            responseDiv.className = 'response';
+
+            try {
+                const response = await fetch('/addSchool', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        name: 'Test School',
+                        address: 'Test Address',
+                        latitude: 12.9716,
+                        longitude: 77.5946
+                    })
+                });
+
+                const data = await response.json();
+                responseDiv.textContent = `Status: ${response.status}\nResponse: ${JSON.stringify(data, null, 2)}`;
+                responseDiv.className = response.ok ? 'response success' : 'response error';
+            } catch (error) {
+                responseDiv.textContent = `Error: ${error.message}`;
+                responseDiv.className = 'response error';
+            }
+        }
+
+        async function testListSchools() {
+            const responseDiv = document.getElementById('listSchoolsResponse');
+            responseDiv.textContent = 'Testing...';
+            responseDiv.className = 'response';
+
+            try {
+                const response = await fetch('/listSchools?latitude=12.9716&longitude=77.5946');
+                const data = await response.json();
+                responseDiv.textContent = `Status: ${response.status}\nResponse: ${JSON.stringify(data, null, 2)}`;
+                responseDiv.className = response.ok ? 'response success' : 'response error';
+            } catch (error) {
+                responseDiv.textContent = `Error: ${error.message}`;
+                responseDiv.className = 'response error';
+            }
+        }
+    </script>
+</body>
+</html>
